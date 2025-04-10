@@ -5,6 +5,7 @@ from aiogram.types import ErrorEvent
 from app.database.dao.project_dao import ProjectDAO
 from app.database.dao.user_dao import UserDAO
 from app.handlers import common
+from app.callbacks import register_new_user
 from app.services.project_service import ProjectService
 from app.utils.logger import logger
 from config.config import Settings
@@ -46,6 +47,7 @@ async def main():
                 raise
 
     dp.include_router(common.router)
+    dp.include_router(register_new_user.router)
 
     try:
         logger.info("Запуск бота...")

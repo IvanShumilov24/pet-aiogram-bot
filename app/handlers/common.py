@@ -2,7 +2,6 @@ from aiogram import Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 
-from app.services.user_service import UserService
 from app.utils.logger import logger
 from keyboards.builder import create_inline_keyboard
 

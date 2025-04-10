@@ -1,13 +1,13 @@
-from enum import Enum
+import enum
 from typing import Optional
 
-from sqlalchemy import Column, Integer, String, JSON
+from sqlalchemy import Column, Integer, String, JSON, Enum
 from sqlalchemy.orm import declarative_base, mapped_column, Mapped
 
 from app.database.models.base import Base
 
 
-class UserType(str, Enum):
+class UserType(str, enum.Enum):
     seller = "seller"
     buyer = "buyer"
 
