@@ -12,14 +12,15 @@ router = Router()
 @router.message(CommandStart())
 async def start_handler(
         message: Message,
-        another_service: UserService,
 ):
     try:
+        await message.answer(f"Привет, {message.from_user.first_name}! Мы тебя приветствуем в нашем боте...")
         await message.answer(
-            f"Привет, {message.from_user.username}! Кто ты?",
+            f"Но сначала тебе нужно сказать кто ты воин. Зачем сюда пришел?",
             reply_markup=await create_inline_keyboard(
-                [("Продавец", "new_user#seller"), ("Покупатель", "new_user#buyer")])
+                [("Я продавец", "new_user#seller"), ("Я покупатель", "new_user#buyer")])
         )
     except Exception as e:
         logger.error(f"Ошибка при обработке /start: {e}")
-        await message.answer("⚠️ Произошла ошибка при регистрации. Попробуйте позже.")
+        await message.answer("Ошибка при обработке /start")
+        # await message.answer("⚠️ Произошла ошибка при регистрации. Попробуйте позже.")
