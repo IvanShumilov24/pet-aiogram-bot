@@ -1,7 +1,8 @@
-
+from psycopg2.sql import Literal
 
 from app.database.dao.user_dao import UserDAO
 from app.database.models.user import User
+from app.schemas.users_schemas import User_type
 from app.utils.logger import logger
 
 
@@ -28,13 +29,7 @@ class UserService:
             user = await self.user_dao.get_user_by_id(user_id)
             if not user:
                 raise ValueError("Пользователь не найден")
-
-            return {
-                'id': user.id,
-                'username': user.username,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-            }
+            return user
         except Exception as e:
             logger.error(f"Ошибка получения профиля {user_id}: {e}")
             raise
