@@ -1,8 +1,8 @@
 import enum
 from typing import Optional
 
-from sqlalchemy import Column, Integer, String, JSON, Enum
-from sqlalchemy.orm import declarative_base, mapped_column, Mapped
+from sqlalchemy import Integer, String, Enum
+from sqlalchemy.orm import mapped_column, Mapped
 
 from app.database.models.base import Base
 
