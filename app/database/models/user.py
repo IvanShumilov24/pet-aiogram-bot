@@ -1,10 +1,15 @@
+from enum import Enum
 from typing import Optional
 
-from pydantic.v1 import UUID4
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, JSON
 from sqlalchemy.orm import declarative_base, mapped_column, Mapped
 
 from app.database.models.base import Base
+
+
+class UserType(str, Enum):
+    seller = "seller"
+    buyer = "buyer"
 
 
 class User(Base):
@@ -14,3 +19,4 @@ class User(Base):
     username: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     first_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     last_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    user_type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=True)

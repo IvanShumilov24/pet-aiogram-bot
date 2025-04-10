@@ -1,5 +1,7 @@
-from loguru import logger
 import sys
+
+from loguru import logger
+
 
 def setup_logger():
     logger.remove()
@@ -18,5 +20,6 @@ def setup_logger():
         compression="zip",
         level="INFO"
     )
+
 
 setup_logger()
