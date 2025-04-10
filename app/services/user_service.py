@@ -1,8 +1,5 @@
-from psycopg2.sql import Literal
-
 from app.database.dao.user_dao import UserDAO
 from app.database.models.user import User
-from app.schemas.users_schemas import User_type
 from app.utils.logger import logger
 
 
