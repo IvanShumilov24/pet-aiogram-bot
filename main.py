@@ -2,8 +2,10 @@ import logging
 
 from aiogram.types import ErrorEvent
 
+from app.database.dao.project_dao import ProjectDAO
 from app.database.dao.user_dao import UserDAO
 from app.handlers import common
+from app.services.project_service import ProjectService
 from app.utils.logger import logger
 from config.config import Settings
 from app.bot import create_bot
@@ -34,6 +36,9 @@ async def main():
     async def di_middleware(handler, event, data):
         async with database.session_maker() as session:
             data["user_service"] = UserService(UserDAO(session))
+            data["user_dao"] = UserDAO(session)
+            data["project_service"] = ProjectService(ProjectDAO(session))
+            data["project_dao"] = ProjectDAO(session)
             try:
                 return await handler(event, data)
             except Exception as e:
