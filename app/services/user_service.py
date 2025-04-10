@@ -21,7 +21,7 @@ class UserService:
             logger.critical(f"Ошибка регистрации пользователя: {e}")
             raise RuntimeError("Ошибка регистрации") from e
 
-    async def get_user_profile(self, user_id: int) -> dict:
+    async def get_user_profile(self, user_id: int) -> User:
         try:
             user = await self.user_dao.get_user_by_id(user_id)
             if not user:

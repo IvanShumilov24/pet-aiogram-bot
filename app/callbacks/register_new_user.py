@@ -19,7 +19,7 @@ async def create_new_user(
             username=callback.message.from_user.username,
             first_name=callback.message.from_user.first_name,
             last_name=callback.message.from_user.last_name,
-            type=user_type,
+            user_type=user_type,
         )
 
         await callback.answer()
