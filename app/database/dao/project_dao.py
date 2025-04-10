@@ -36,7 +36,7 @@ class ProjectDAO:
             await self.session.rollback()
             raise
 
-    async def project(self, project_data: dict) -> tuple[User, bool]:
+    async def get_or_create_project(self, project_data: dict) -> tuple[User, bool]:
         project = await self.get_project_by_id(project_data['id'])
         if project:
             return project, False
@@ -45,4 +45,13 @@ class ProjectDAO:
             return project, True
         except Exception as e:
             logger.error(f"Ошибка при получении или создании проекта: {e}")
+            raise
+
+    async def get_all_projects_by_seller_id(self, seller_id: int) -> list[Project] | None:
+        try:
+            query = select(Project).where(Project.seller_id == seller_id)
+            result = await self.session.execute(query)
+            return result.scalars().all()
+        except SQLAlchemyError as e:
+            logger.error(f"Ошибка при получении всех проектов: {e}")
             raise
